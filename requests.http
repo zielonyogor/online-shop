@@ -1,0 +1,21 @@
+
+@base_url=http://localhost:3000/api
+
+GET {{base_url}}/items/1
+
+###
+
+GET {{base_url}}/items/
+
+###
+
+POST {{base_url}}/items
+Content-Type: application/json
+
+{
+  "name": "Test item",
+  "description": "Test",
+  "category": "Testing",
+  "price": 5,
+  "quantity": 5
+}

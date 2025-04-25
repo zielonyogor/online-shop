@@ -1,4 +1,6 @@
 import express from 'express';
+import apiRoutes from './api';
+
 const router = express.Router();
 
 router.get('/', (request : express.Request, response : express.Response) => {
@@ -9,6 +11,7 @@ router.get('/test', (request : express.Request, response : express.Response) => 
     response.send('Test succeed');
 });
 
-//module.exports = router;
+// other TS files
+router.use('/api', apiRoutes);
 
 export default router;
