@@ -1,4 +1,4 @@
-import { sequelize, Item } from './models/index';
+const { sequelize, Item } = require('./models/index');
 
 (async () => {
     await sequelize.sync({force: true});

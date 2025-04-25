@@ -1,22 +1,22 @@
-import express from 'express';
-import { sequelize, Item } from '../models/index';
+const express = require('express');
+const { Item } = require('../models/item');
 
 const router = express.Router();
 
 // Get all items
-router.get('/items', async (req : express.Request, res : express.Response) => {
+router.get('/items', async (req, res) => {
     const item = await Item.findAll();
     res.json(item);
 });
 
 // Get item by ID
-router.get('/items/:id', async (req : express.Request, res : express.Response) => {
+router.get('/items/:id', async (req, res) => {
     const item = await Item.findByPk(req.params.id);
     res.json(item);
 });
 
 // Post item
-router.post('/items', async (req : express.Request, res : express.Response) => {
+router.post('/items', async (req, res) => {
     try {
         const { name, description, image, category, price, quantity } = req.body;
 
@@ -46,7 +46,7 @@ router.post('/items', async (req : express.Request, res : express.Response) => {
 });
 
 // Put item
-router.put('/items/:id', async (req : express.Request, res : express.Response) => {
+router.put('/items/:id', async (req, res) => {
     try {
         const { name, description, image, category, price, quantity } = req.body;
 
@@ -79,7 +79,7 @@ router.put('/items/:id', async (req : express.Request, res : express.Response) =
 
 
 // Delete item by ID
-router.delete('/items/:id', async (req : express.Request, res : express.Response) => {
+router.delete('/items/:id', async (req, res) => {
     try {
         const item = await Item.findByPk(req.params.id);
 
@@ -101,4 +101,4 @@ router.delete('/items/:id', async (req : express.Request, res : express.Response
     }
 });
 
-export default router;
+module.exports = router;
