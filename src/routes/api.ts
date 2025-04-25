@@ -4,28 +4,28 @@ import { sequelize, Item } from '../models/index';
 const router = express.Router();
 
 // Get all items
-router.get('/items', async (request : express.Request, response : express.Response) => {
+router.get('/items', async (req : express.Request, res : express.Response) => {
     const item = await Item.findAll();
-    response.json(item);
+    res.json(item);
 });
 
 // Get item by ID
-router.get('/items/:id', async (request : express.Request, response : express.Response) => {
-    const item = await Item.findByPk(request.params.id);
-    response.json(item);
+router.get('/items/:id', async (req : express.Request, res : express.Response) => {
+    const item = await Item.findByPk(req.params.id);
+    res.json(item);
 });
 
 // Post item
-router.post('/items', async (request : express.Request, response : express.Response) => {
+router.post('/items', async (req : express.Request, res : express.Response) => {
     try {
-        const { name, description, image, category, price, quantity } = request.body;
+        const { name, description, image, category, price, quantity } = req.body;
 
         if( !name || !category || !price || !quantity ) {
-            response.status(400).json({ message: 'Name, category, price and quantity are required'});
+            res.status(400).json({ message: 'Name, category, price and quantity are required'});
             return;
         }
 
-        const newItem = Item.create({
+        const newItem = await Item.create({
             name,
             description: description || null,
             image: image || null,
@@ -34,12 +34,68 @@ router.post('/items', async (request : express.Request, response : express.Respo
             quantity
         });
 
-        response.status(201).json({message: 'Item created successfully'});
+        res.status(201).json({message: 'Item created successfully'});
 
     } catch (error) {
         console.log(error);
-        response.status(500).json({
+        res.status(500).json({
             message: 'Error creating an item',
+            error: error,
+        });
+    }
+});
+
+// Put item
+router.put('/items/:id', async (req : express.Request, res : express.Response) => {
+    try {
+        const { name, description, image, category, price, quantity } = req.body;
+
+        const item = await Item.findByPk(req.params.id);
+
+        if (!item) {
+           res.status(404).json({ message: 'Item not found' });
+           return;
+        }
+
+        await item?.update({
+            name: name || item.name,
+            description: description || item.description,
+            image: image || item.image,
+            category: category || item.category,
+            price: price || item.price,
+            quantity: quantity || item.quantity,
+        });
+
+        res.status(201).json({message: 'Item updated successfully'});
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Error updating an item',
+            error: error,
+        });
+    }
+});
+
+
+// Delete item by ID
+router.delete('/items/:id', async (req : express.Request, res : express.Response) => {
+    try {
+        const item = await Item.findByPk(req.params.id);
+
+        if (!item) {
+           res.status(404).json({ message: 'Item not found' });
+           return;
+        }
+
+        await item.destroy();
+
+        res.status(201).json({message: 'Item deleted successfully'});
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Error deleting an item',
             error: error,
         });
     }
