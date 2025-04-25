@@ -22,11 +22,11 @@ Content-Type: application/json
 
 ###
 
-PUT {{base_url}}/items/3
+PUT {{base_url}}/items/1
 Content-Type: application/json
 
 {
-  "quantity": 4
+  "image": "keychain_cat.jpg"
 }
 
 ###
