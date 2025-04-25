@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><% item.name %> - jelly shop</title>
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Tiny5&display=swap" rel="stylesheet">
+    <title><%= item.name %> - jelly shop</title>
 </head>
 <body>
-  <h1><%= title %></h1>
+  <%- include('partials/navbar.ejs') %>
+
+  <main>
+    <div class="item-details-container">
+      <img src="<%= item.image ? '/images/' + item.image : '/images/image_not_found.png' %>" alt="<%= item.name %>" />
+      <div class="details">
+        <div class="main-info">
+          <h2><%= item.name %></h2>
+          <p class="description"><%= item.description %></p>
+        </div>
+        
+        <div class="buy-info">
+          <h4><%= item.price %> $</h4>
+          <input type="number" value="1" min="0" max="<%= item.quantity %>" />
+          <button>Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer.ejs') %>
 </body>
 </html>

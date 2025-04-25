@@ -1,6 +1,11 @@
+@use 'sass:color';
+
 $primary-color: rgb(125, 127, 165);
 $on-primary-color: rgb(69, 30, 87);
 $background-color: white;
+$secondary-color: #B3D1B1;
+$teritary-color: #818A94;
+$on-secondary-color: #011936;
 
 body {
   font-size: 18px;
@@ -16,6 +21,18 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+button, input {
+  font-size: 18px;
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: $on-primary-color;
 }
 
 nav {
@@ -48,19 +65,32 @@ nav {
 
 main {
   flex-grow: 1;
+  margin: 20px 10vw;
+  display: flex;
+  justify-content: center;
 }
 
 footer {
-  margin: 10px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: $teritary-color;
+  color: $on-secondary-color;
+
+  p {
+    margin: 0;
+    margin-bottom: 8px;
+    margin-top: 4px;
+  }
 }
 
 .list-container {
-  margin: 20px 10vw;
   background-color: $primary-color;
+  border-radius: 20px;
   color: $on-primary-color;
+  width: 100%;
 
   display: flex;
   flex-wrap: wrap;
@@ -69,24 +99,125 @@ footer {
 .item-tile {
   margin: 20px;
   padding: 10px;
+  box-sizing: border-box;
+  width: 260px;
+  height: 280px;
+
   background-color:#f9f9f9;
   border-radius: 16px;
 
   cursor: pointer;
 
   img {
-    width: 160px;
-    aspect-ratio: 1/1;
+    width: 100%;
+    height: 74%;
+    object-fit: cover;
+    
     border-radius: 16px;
   }
 
   h4 {
     font-size: 1.1em;
+    margin-top: 12px;
     margin-bottom: 4px;
   }
 
   p {
     text-align: end;
     margin: 0;
+    margin-right: 4px;
+  }
+}
+
+// -------------- Item details -----------------
+
+.item-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+  background-color: $secondary-color;
+  border-radius: 20px;
+
+  img {
+    width: 28vw;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .details {
+    box-sizing: border-box;
+    margin: 40px;
+    border: solid $primary-color 6px;
+    border-radius: 20px;
+    padding: 20px;
+
+    color: $on-secondary-color;
+
+    width: 30vw;
+    height: auto;
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .main-info{
+      flex-grow: 1;
+        h2 {
+        color: $on-primary-color;
+        font-size: 2.4rem;
+        margin: 8px 8px 18px 8px;
+      }
+
+      .description {
+        margin-top: 0;
+        color: color.adjust($on-secondary-color, $lightness: 10%);
+      }
+    }
+    
+    .buy-info {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      
+
+      h4 {
+        text-align: end;
+        color: $on-secondary-color;
+        font-size: 2.2rem;
+        flex-grow: 1;
+      }
+
+      button {
+        background-color: $on-secondary-color;
+        color: $secondary-color;
+
+        border: none;
+        border-radius: 20px;
+        margin-left: 20px;
+        padding: 16px;
+
+        cursor: pointer;
+
+        &:hover {
+          color: $teritary-color;
+        }
+      }
+
+      input[type="number"] {
+        border: none;
+        border-radius: 20px;
+        margin-left: 20px;
+        padding: 16px;
+
+        width: 30px;
+        background-color: $primary-color;
+        color:$on-primary-color;
+      }
+    }
   }
 }

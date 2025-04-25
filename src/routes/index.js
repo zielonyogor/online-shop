@@ -1,17 +1,17 @@
 const express = require('express');
 const apiRoutes = require('./api');
+const itemRoutes = require('./itemDetails');
+const { Item } = require('../models/item');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('index', { title: 'Hello TypeScript with Express and EJS' });
-  });
-
-router.get('/test', (req, res) => {
-    res.send('Test succeed');
+router.get('/', async (req, res) => {
+  const items = await Item.findAll();
+  res.render('index', { items: items });
 });
 
-// other TS files
+// other JS files
 router.use('/api', apiRoutes);
+router.use('/items', itemRoutes);
 
 module.exports = router;

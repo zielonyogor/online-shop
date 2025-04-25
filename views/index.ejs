@@ -8,23 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Tiny5&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav>
-    <a href="./index.ejs" class="nav-el title">Jelly shop</a>
-    <a href="./cart.ejs" class="nav-el shopping-cart">Cart</a>
-  </nav>
+  <%- include('partials/navbar.ejs') %>
 
   <main>
     <div class="list-container">
-      <div class="item-tile hidden">
-        <img src="/images/keychain_cat.jpg"/>
-        <h4 class="item-title">Test Item</h4>
-        <p class="price">9.99 $</p>
-      </div>
+      <% items.forEach(item => { %>
+        <%- include('partials/itemTile.ejs', {item: item}) %>
+      <% }) %>
     </div>
   </main>
 
-  <footer>
-    <p>@ Jelly shop</p>
-  </footer>
+  <%- include('partials/footer.ejs') %>
 </body>
 </html>

@@ -1,0 +1,7 @@
+<div class="item-tile hidden">
+    <a href="/items/<%= item.id %>" >
+      <img src="<%= item.image ? '/images/' + item.image : '/images/image_not_found.png' %>" alt="<%= item.name %>" />
+      <h4 class="item-title"><%= item.name %></h4>
+      <p class="price"><%= item.price %> $</p>
+    </a>
+</div>
