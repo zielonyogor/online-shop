@@ -1,7 +1,7 @@
 <nav>
     <a href="/" class="nav-el title">Jelly shop</a>
-    <div class="cart-container">
-        <a href="/" class="nav-el shopping-cart">Cart</a>
+    <div class="cart-icon-container">
+        <a href="/cart" class="nav-el shopping-cart">Cart</a>
         <span class="shopping-cart-number">
             <% if (sess.cart) { 
                  let totalAmount = sess.cart.reduce((sum, item) => sum + item.amount, 0); 

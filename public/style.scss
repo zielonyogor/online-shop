@@ -1,90 +1,8 @@
 @use 'sass:color';
+@use "./colors" as *;
 
-$primary-color: rgb(125, 127, 165);
-$on-primary-color: rgb(69, 30, 87);
-$background-color: white;
-$secondary-color: #B3D1B1;
-$teritary-color: #818A94;
-$on-secondary-color: #011936;
-
-body {
-  font-size: 18px;
-  font-family: "Tiny5", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 0.1em;
-  background: #f9f9f9;
-  
-  margin: 0;
-  padding: 0;
-
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-button, input {
-  font-size: 18px;
-  font-family: "Tiny5", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-a {
-  text-decoration: none;
-  color: $on-primary-color;
-}
-
-nav {
-  padding: 16px;
-  background-color: $primary-color;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-
-  a {
-    font-style: none;
-    color: $on-primary-color;
-    text-decoration: none;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .nav-el {
-    &.title {
-      font-size: 1.8rem;
-      font-weight: 600;
-    }
-  }
-}
-
-main {
-  flex-grow: 1;
-  margin: 20px 10vw;
-  display: flex;
-  justify-content: center;
-}
-
-footer {
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: $teritary-color;
-  color: $on-secondary-color;
-
-  p {
-    margin: 0;
-    margin-bottom: 8px;
-    margin-top: 4px;
-  }
-}
+@import "./cart-style.scss";
+@import "./layout.scss";
 
 .list-container {
   background-color: $primary-color;
@@ -104,9 +22,8 @@ footer {
   box-sizing: border-box;
   width: 260px;
   height: 280px;
-  //transform-origin: bottom center;
 
-  background-color:#f9f9f9;
+  background-color: $background-color;
   border-radius: 16px;
 
   cursor: pointer;
@@ -239,17 +156,19 @@ footer {
         }
       }
 
-      input[type="number"] {
-        border: none;
-        border-radius: 20px;
-        margin-left: 20px;
-        padding: 16px;
-        padding-right: 10px;
-        width: 40px;
-
-        background-color: $primary-color;
-        color:$on-primary-color;
-      }
+      
     }
   }
+}
+
+input[type="number"] {
+  border: none;
+  border-radius: 20px;
+  margin-left: 20px;
+  padding: 16px;
+  padding-right: 10px;
+  width: 40px;
+
+  background-color: $primary-color;
+  color:$on-primary-color;
 }

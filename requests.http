@@ -1,6 +1,8 @@
 
 @base_url=http://localhost:3000/api
 
+###
+
 GET {{base_url}}/items/1
 
 ###
@@ -32,3 +34,24 @@ Content-Type: application/json
 ###
 
 DELETE  {{base_url}}/items/3
+
+###
+
+GET http://localhost:3000/
+
+###
+
+POST http://localhost:3000/cart/add
+Content-Type: application/json
+Cookie: connect.sid=s%3AgI-9MmQ03btGB5YbtkOEWsgv-k0i60Y7.zzFZxnaWotLNH4rrwnsHdR4wHOE0iXiGzmnErVfXW7o; Path=/; HttpOnly
+
+{
+  "id": 2,
+  "amount": 2
+}
+
+###
+
+POST http://localhost:3000/cart/buy
+Content-Type: application/json
+Cookie: connect.sid=s%3AgI-9MmQ03btGB5YbtkOEWsgv-k0i60Y7.zzFZxnaWotLNH4rrwnsHdR4wHOE0iXiGzmnErVfXW7o; Path=/; HttpOnly

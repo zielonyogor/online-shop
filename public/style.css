@@ -1,3 +1,60 @@
+.cart-container {
+  background-color: rgb(125, 127, 165);
+  border-radius: 20px;
+  color: rgb(69, 30, 87);
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.cart-item {
+  background-color: #B3D1B1;
+  border-radius: 20px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+}
+.cart-item a {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.cart-item a img {
+  width: 90px;
+  border-radius: 14px;
+  margin-right: 40px;
+}
+.cart-item a h4 {
+  font-size: 1.2em;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.delete-btn {
+  background-color: #011936;
+  color: #B3D1B1;
+  border: none;
+  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 2rem;
+}
+.delete-btn:hover {
+  color: #818A94;
+}
+
+.item-amount {
+  margin-right: 80px;
+}
+
+.total-amount {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
 body {
   font-size: 18px;
   font-family: "Tiny5", sans-serif;
@@ -25,6 +82,8 @@ a {
 }
 
 nav {
+  position: sticky;
+  top: 0;
   padding: 16px;
   background-color: rgb(125, 127, 165);
   display: flex;
@@ -192,7 +251,8 @@ footer p {
 .item-details-container .details .buy-info button:hover {
   color: #818A94;
 }
-.item-details-container .details .buy-info input[type=number] {
+
+input[type=number] {
   border: none;
   border-radius: 20px;
   margin-left: 20px;

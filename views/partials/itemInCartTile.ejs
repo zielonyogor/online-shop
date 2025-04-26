@@ -1,0 +1,9 @@
+<div class="cart-item">
+    <a href="/items/<%= item.id %>" >
+      <img src="<%= item.image ? '/images/' + item.image : '/images/image_not_found.png' %>" alt="<%= item.name %>" />
+      <h4 class="item-title"><%= item.name %></h4>
+    </a>
+    <span class="total-amount"><%= item.price %> $</span>
+    <input class="item-amount" name="amount" type="number" value="<%= item.amount %>" min="0" max="<%= item.quantity %>" />
+    <button class="delete-btn">X</button>
+</div>
