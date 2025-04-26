@@ -10,7 +10,7 @@
     <title><%= item.name %> - jelly shop</title>
 </head>
 <body>
-  <%- include('partials/navbar.ejs') %>
+  <%- include('partials/navbar.ejs', {sess: sess}) %>
 
   <main>
     <div class="item-details-container">
@@ -23,8 +23,11 @@
         
         <div class="buy-info">
           <h4><%= item.price %> $</h4>
-          <input type="number" value="1" min="0" max="<%= item.quantity %>" />
-          <button>Add to cart</button>
+          <form action="/cart/add" method="POST">
+            <input type="hidden" name="id" value="<%= item.id %>">
+            <input id="item-amount" name="amount" type="number" value="1" min="0" max="<%= item.quantity %>" />
+            <button type="submit" id="add-item-btn">Add to cart</button>
+          </form>
         </div>
       </div>
     </div>

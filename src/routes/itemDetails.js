@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/:id', async (req, res) => {
     const item = await Item.findByPk(req.params.id);
-    res.render('item', {item: item});
+    res.render('itemDetails', {item: item, sess: req.session});
 });
 
 module.exports = router;

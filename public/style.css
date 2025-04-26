@@ -101,7 +101,33 @@ footer p {
   margin: 0;
   margin-right: 4px;
 }
+.item-tile:hover {
+  animation: shake 1.8s infinite;
+}
 
+@keyframes shake {
+  0%, 30% {
+    transform: rotate(0);
+  }
+  35% {
+    transform: rotate(-2deg);
+  }
+  40% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  55% {
+    transform: rotate(-2deg);
+  }
+  60%, 100% {
+    transform: rotate(0);
+  }
+}
 .item-details-container {
   display: flex;
   justify-content: center;
@@ -159,7 +185,7 @@ footer p {
   color: #B3D1B1;
   border: none;
   border-radius: 20px;
-  margin-left: 20px;
+  margin-left: 12px;
   padding: 16px;
   cursor: pointer;
 }
@@ -171,7 +197,8 @@ footer p {
   border-radius: 20px;
   margin-left: 20px;
   padding: 16px;
-  width: 30px;
+  padding-right: 10px;
+  width: 40px;
   background-color: rgb(125, 127, 165);
   color: rgb(69, 30, 87);
 }

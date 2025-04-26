@@ -96,12 +96,15 @@ footer {
   flex-wrap: wrap;
 }
 
+// ---------------- Item tiles -------------------
+
 .item-tile {
   margin: 20px;
   padding: 10px;
   box-sizing: border-box;
   width: 260px;
   height: 280px;
+  //transform-origin: bottom center;
 
   background-color:#f9f9f9;
   border-radius: 16px;
@@ -126,6 +129,34 @@ footer {
     text-align: end;
     margin: 0;
     margin-right: 4px;
+  }
+
+  &:hover {
+    animation: shake 1.8s infinite;
+  }
+}
+
+@keyframes shake {
+  0%, 30% {
+    transform: rotate(0);
+  }  
+  35% {
+    transform: rotate(-2deg);
+  }  
+  40% {
+    transform: rotate(0deg);
+  } 
+  45% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  55% {
+    transform: rotate(-2deg);
+  }
+  60%, 100% {
+    transform:rotate(0);
   }
 }
 
@@ -198,7 +229,7 @@ footer {
 
         border: none;
         border-radius: 20px;
-        margin-left: 20px;
+        margin-left: 12px;
         padding: 16px;
 
         cursor: pointer;
@@ -213,8 +244,9 @@ footer {
         border-radius: 20px;
         margin-left: 20px;
         padding: 16px;
+        padding-right: 10px;
+        width: 40px;
 
-        width: 30px;
         background-color: $primary-color;
         color:$on-primary-color;
       }
