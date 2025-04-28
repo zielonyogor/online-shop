@@ -44,6 +44,31 @@ router.post('/add', async (req, res) => {
     res.redirect(`/items/${id}`);  
 });
 
+router.put('/update', async (req, res) => {
+    const { id, amount } = req.body;
+    
+    const item = req.session.cart.find((item) => item.id == id);
+    console.log(req.session.cart);
+    if(!item) {
+        res.status(400).json({ message: 'Item is not in cart. Incorrect request'});
+        return;
+    }
+    
+    item.amount = amount;
+    res.status(200).json({ message: 'Cart updated successfully' });
+});
+
+router.delete('/delete', async (req, res) => {
+    const { id } = req.body;
+    
+    req.session.cart = req.session.cart.filter(item => item.id != id);
+    
+    res.status(200).json({ message: 'Item deleted from cart' });
+});
+
+
+// --------------- Buy -------------------
+
 router.post('/buy', async (req, res) => {
     const cart = req.session.cart;
     const itemIds = cart.map(i => i.id);

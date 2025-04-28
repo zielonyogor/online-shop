@@ -1,9 +1,42 @@
-<div class="cart-item">
+<div class="cart-item" data-id="<%= item.id %>">
     <a href="/items/<%= item.id %>" >
       <img src="<%= item.image ? '/images/' + item.image : '/images/image_not_found.png' %>" alt="<%= item.name %>" />
       <h4 class="item-title"><%= item.name %></h4>
     </a>
-    <span class="total-amount"><%= item.price %> $</span>
+    <span class="total-amount"><%= parseInt(item.price) * parseInt(item.amount) %> $</span>
     <input class="item-amount" name="amount" type="number" value="<%= item.amount %>" min="0" max="<%= item.quantity %>" />
     <button class="delete-btn">X</button>
 </div>
+
+<script>
+  document.querySelectorAll(".cart-item").forEach(item => {
+    const input = item.querySelector(".item-amount");
+    const itemId = parseInt(item.dataset.id);
+
+    input.addEventListener('change', async (e) => {
+      const amount = e.target.value;
+
+      await fetch('/cart/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: itemId, amount: amount})
+      })
+
+      window.location.reload();
+    });
+
+    const deleteButton = item.querySelector('.delete-btn').addEventListener('click', async () => {
+      await fetch('/cart/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: itemId })
+      });
+
+      window.location.reload();
+    });
+  });
+</script>
