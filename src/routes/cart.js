@@ -1,5 +1,5 @@
 const express = require('express');
-const { Item } = require('../models/item');
+const { Item, sequelize } = require('../models/item');
 
 const router = express.Router();
 
@@ -39,26 +39,61 @@ router.post('/add', async (req, res) => {
     else {
         req.session.cart.push({ id, amount: parseInt(amount) });
     }
-
+    
     console.log('Cart: ', req.session.cart);
     res.redirect(`/items/${id}`);  
 });
 
 router.post('/buy', async (req, res) => {
     const cart = req.session.cart;
+    const itemIds = cart.map(i => i.id);
 
-    cart.forEach(async ({id, amount}) => {
-        const item = await Item.findByPk(id);
+    const t = await sequelize.transaction();
 
-        if (!item) {
-           res.status(404).json({ message: 'Item not found' });
-           return;
+    try {
+        const databaseItems = await Item.findAll({
+            where: {id: itemIds},
+            lock: t.LOCK.UPDATE,
+            transaction: t
+        });
+
+        for(let cartItem of cart) {
+            let dbItem = databaseItems.find(i => i.id == cartItem.id );
+            console.log(dbItem);
+
+            if(dbItem.quantity < cartItem.amount) {
+                throw new Error('Not enough items in stock');
+            }
         }
-        
-        await item.update({...item, amount: (item.amount - amount)});
-    });
+
+        for(let cartItem of cart) {
+            let dbItem = databaseItems.find(i => i.id == cartItem.id );
+
+            dbItem.quantity -= cartItem.amount;
+            await dbItem.save({transaction: t});
+        }
+
+        await t.commit();
+        req.session.cart = [];
+        res.redirect('/cart/success');
+
+    } catch (error) {
+        await t.rollback();
+
+        console.log(`Transaction error ${error.message}`);
+
+        req.session.error = error.message || 'Something went wrong :( Try again';
+        res.redirect('/cart');
+    }
+    
 
     res.status(200);
+});
+
+router.get('/success', (req, res) => {
+    req.session.cart = [];
+
+    res.render('success', { sess: req.session });
 });
 
 module.exports = router;

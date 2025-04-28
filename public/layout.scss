@@ -63,7 +63,8 @@ main {
     flex-grow: 1;
     margin: 20px 10vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
   
 footer {

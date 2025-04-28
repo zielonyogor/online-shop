@@ -1,14 +1,15 @@
 @use 'sass:color';
 @use "./colors" as *;
 
-@import "./cart-style.scss";
-@import "./layout.scss";
+@use "./cart-style.scss";
+@use "./layout.scss";
 
 .list-container {
   background-color: $primary-color;
   border-radius: 20px;
   color: $on-primary-color;
   width: 100%;
+  flex-grow: 1;
 
   display: flex;
   flex-wrap: wrap;
@@ -48,8 +49,11 @@
     margin-right: 4px;
   }
 
+  transition: box-shadow 0.2s ease-out;
+
   &:hover {
     animation: shake 1.8s infinite;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -171,4 +175,29 @@ input[type="number"] {
 
   background-color: $primary-color;
   color:$on-primary-color;
+}
+
+.error-message {
+  color: $on-secondary-color;
+  font-weight: 800;
+  font-size: 1.6rem;
+  background-color: $teritary-color;
+  position: fixed;
+  padding: 20px;
+  padding-top: 50px;
+  border: solid 4px $on-secondary-color;
+  border-radius: 20px;
+  top: calc(0% - 20px);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+
+  animation: hide-message 2s cubic-bezier(.33,.02,.24,-0.36) 3s 1 forwards;
+}
+
+@keyframes hide-message {
+  0% {
+    
+  }
+  100% {
+    transform: translateY(-200px);
+  }
 }
