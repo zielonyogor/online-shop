@@ -27,7 +27,7 @@
             <% }) %>
         </div>
         <form method="POST" action="/cart/buy">
-          <button class="buy-btn">Buy!</button>
+          <button class="buy-btn" <%= itemsInCart.length === 0 ? 'disabled' : '' %>>Buy!</button>
         </form>
     </div>
   </main>

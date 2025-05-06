@@ -71,8 +71,11 @@
   text-align: center;
   font-size: 2rem;
 }
-.buy-btn:hover {
+.buy-btn:not(:disabled):hover {
   color: #818A94;
+}
+.buy-btn:disabled {
+  background-color: #818A94;
 }
 
 body {
